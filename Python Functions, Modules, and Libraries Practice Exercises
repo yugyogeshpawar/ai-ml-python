@@ -1,0 +1,70 @@
+# Python Functions, Modules, and Libraries Practice Exercises
+
+## Functions
+
+1. **Create a Simple Function**  
+   Write a function `greet()` that takes a name as input and prints "Hello, [name]!".
+
+2. **Function with Return Value**  
+   Write a function `square(num)` that returns the square of a given number.
+
+3. **Function with Multiple Parameters**  
+   Write a function `calculate_area(length, width)` that returns the area of a rectangle.
+
+4. **Function with Default Argument**  
+   Create a function `power(base, exponent=2)` that returns the base raised to the exponent. If no exponent is provided, square the base.
+
+5. **Function with Optional Parameters**  
+   Write a function `introduce(name, age=None)` that prints "My name is [name] and I am [age] years old." If age is not provided, print only the name.
+
+6. **Using a Function with List Input**  
+   Write a function `calculate_total(numbers)` that takes a list of numbers and returns their sum.
+
+7. **Recursive Function**  
+   Write a recursive function `factorial(n)` that calculates the factorial of a given number `n`.
+
+8. **Function Returning Multiple Values**  
+   Create a function `get_min_max(numbers)` that returns both the minimum and maximum values in a list.
+
+9. **Lambda Function**  
+   Write a lambda function that takes two numbers and returns their product.
+
+10. **Filter with Lambda**  
+    Use a lambda function and `filter()` to filter out even numbers from a list of integers.
+
+## Modules and Libraries
+
+11. **Importing Math Library**  
+    Import the `math` library and write a function `calculate_circle_area(radius)` that uses `math.pi` to calculate the area of a circle.
+
+12. **Using the Random Library**  
+    Use the `random` library to create a function `roll_dice()` that simulates rolling a 6-sided die and returns a random number between 1 and 6.
+
+13. **Date and Time with datetime Library**  
+    Write a function `current_time()` that returns the current date and time using the `datetime` module.
+
+14. **File I/O and os Library**  
+    Use the `os` module to write a function `list_files(directory)` that returns a list of all files in a specified directory.
+
+15. **Creating and Using Custom Modules**  
+    Create a module called `mymath` with a function `add(a, b)`. Import this module in a new script and call `add()` to add two numbers.
+
+16. **Using json Library**  
+    Write a function `save_to_json(data, filename)` that saves a Python dictionary to a JSON file using the `json` library.
+
+17. **Random Number Generator with Seeding**  
+    Write a function `seeded_random(seed)` that sets a random seed using `random.seed()` and returns a random number.
+
+18. **Using Collections Library**  
+    Use the `collections.Counter` to write a function `count_elements(items)` that returns the frequency of each element in a list.
+
+19. **Using Regular Expressions (re Library)**  
+    Write a function `find_words(text)` that uses regular expressions to find all words in a given string and return them as a list.
+
+20. **Using itertools Library**  
+    Write a function `generate_combinations(items, n)` that returns all possible combinations of `n` elements from a list using `itertools.combinations`.
+
+---
+
+## Instructions
+Complete each exercise in the corresponding `.py` file. Test each function with a few sample inputs to ensure it works correctly. Each exercise will help reinforce your understanding of Python functions, modules, and libraries.
