@@ -14,7 +14,15 @@ def real_time_recognization():
                 print(f"An error occured: {e}")
 
 
-real_time_recognization()
+def text_to_speech(mytext, language):
+    audio_obj = gTTS(text=mytext, lang=language, slow=False)
+    audio_obj.save("text_to_speech.mp3")
+
+
+text_to_speech("Hello my name is John", "en")
+
+
+# real_time_recognization()
 
 
 
