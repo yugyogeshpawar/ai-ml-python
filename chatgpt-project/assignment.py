@@ -31,7 +31,7 @@ def text_to_speech_google_cloud(mytext, language_code="en-US", voice_name="en-US
         print("Audio content written to file 'realistic_voice.mp3'.")
 
 # Example usage
-text = "Hello, Yogesh! This is a natural-sounding text-to-speech voice."
+text = "Hello, Rahul! This is a natural-sounding text-to-speech voice."
 text_to_speech_google_cloud(mytext=text)
 
 
