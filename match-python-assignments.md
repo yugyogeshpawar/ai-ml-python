@@ -1,53 +1,24 @@
+# Python Assignment Questions
 
-# Python `match` Statement – Assignment Questions
+## Part A: Beginner Questions (Match Statements & Functions)
 
-### Beginner Level
-
-1. **Basic Matching**
-
-   * Write a Python program using `match` to check a number from 1 to 3 and print its name (e.g., 1 = "One").
-
-2. **Simple String Matching**
-
-   * Ask the user to input a day of the week (e.g., "Monday") and use `match` to print if it's a weekday or weekend.
-
-3. **Match with Default Case**
-
-   * Use `match` to print a color's meaning (e.g., "red" = "Stop", "green" = "Go"). If the color is not known, print "Unknown color".
-
-4. **Match with Integer Ranges**
-
-   * Match an exam score (0-100) and return a grade (A, B, C, D, F).
-
-5. **Using `match` with Tuples**
-
-   * Create a `match` block that takes a coordinate like `(x, y)` and prints if it's on the X-axis, Y-axis, or origin.
-
----
-
-### Intermediate Level
-
-6. **Match with Multiple Patterns**
-
-   * Match an input to multiple cases (e.g., "cat", "dog", "rabbit" → "Animal").
-
-7. **Nested Match**
-
-   * Use `match` inside another `match`. For example, match a product type and then match the brand.
-
-8. **Match on Data Types**
-
-   * Write a function that takes any input and uses `match` to print the type (int, float, str, list).
-
----
-
-### Advanced Level
-
-9. **Pattern Matching with Lists**
-
-   * Use `match` to analyze a list like `[1, 2, 3]`, `[1]`, `[]` and print different messages depending on the length and values.
-
-10. **Custom Class Pattern Matching**
-
-* Create a class `Person(name, age)` and use `match` to print different messages based on age group (child, teen, adult, senior).
-
+1. Write a function to print "Hello, World!".
+2. Create a function that takes two numbers and returns their sum.
+3. Write a function that returns the square of a number.
+4. Define a function that checks if a number is even.
+5. Write a match statement that prints the day of the week based on a number (1-7).
+6. Use match to check if a number is positive, negative, or zero.
+7. Create a function that takes a name and prints "Hello, name".
+8. Write a function that returns the largest of two numbers.
+9. Use match to determine a grade from a letter (A, B, C, D, F).
+10. Write a function that returns the factorial of a number.
+11. Create a function that returns the length of a string.
+12. Use match to select a fruit based on user input.
+13. Define a function that returns True if a string contains "a".
+14. Write a function that takes a list and returns the sum of its elements.
+15. Create a function that converts Celsius to Fahrenheit.
+16. Use match to print a message for a given traffic light color.
+17. Define a function to check if a number is divisible by 3.
+18. Create a function that prints all numbers from 1 to 10.
+19. Write a match case for basic arithmetic operations (+, -, *, /).
+20. Define a function that returns the reverse of a string.
