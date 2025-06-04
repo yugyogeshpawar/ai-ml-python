@@ -1,10 +1,10 @@
-from google import genai
 
-client = genai.Client(api_key="<Key>")
+import gemini_utils
 
-response = client.models.generate_content(
-    model="gemini-2.0-flash",
-    contents="I can see cracks on my wall. How i can deal with it. tell me in short",
-)
+gemini_prompt = input("Ask anything: ")
+image_path = "images2.jpeg"
 
-print(response.text)
+# gemini_utils.mygeminicall(gemini_prompt)
+
+
+gemini_utils.geminicallwithimage(gemini_prompt, image_path)
