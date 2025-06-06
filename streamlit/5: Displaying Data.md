@@ -124,7 +124,7 @@ import pandas as pd
 st.title("Displaying Data in Streamlit")
 
 data = pd.DataFrame({
-    "Name": ["Yogesh", "Nidhi", "Tushar"],
+    "Name": ["Yogesh", "Anuj", "Yuvraj"],
     "Age": [27, 24, 30],
     "Score": [88, 92, 85]
 })
