@@ -41,7 +41,7 @@ import streamlit as st
 import pandas as pd
 
 data = pd.DataFrame({
-    'Name': ['Yogesh', 'Nidhi', 'Tushar'],
+    'Name': ['Yogesh', 'Yuvraj', 'Anuj'],
     'Score': [85, 92, 78]
 })
 
