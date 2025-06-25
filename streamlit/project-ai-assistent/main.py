@@ -1,35 +1,66 @@
 import streamlit as st
 from PyPDF2 import PdfReader
-from google import genai
-from google.genai import types
-
-
-client = genai.Client(api_key="AIzaSyDOhlcF6po_OI1mYhCGX9a7fuHaUOJ6uOU")
+import gemini_utils as gu
+import time
 
 
 st.write("Ai interviewer")
 
 pdf_file = st.file_uploader("Upload your resume")
+progress_text = "Operation in progress. Please wait."
 
-if pdf_file:
 
-    reader = PdfReader(pdf_file)
-    number_of_pages = len(reader.pages)
-    text = ""
-    for x in range(0, number_of_pages):
-        page = reader.pages[x]
-        text += page.extract_text()
+# Initialize session state variables
+if "response_text" not in st.session_state:
+    st.session_state.response_text = None
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents = text,
-        config=types.GenerateContentConfig(system_instruction="You are a ai interviewer, first you have provided the extracted data of pdf now first orginize the data and give back."),
+
+if "interview_started" not in st.session_state:
+    st.session_state.interview_started = False
+
+if "pdf_processed" not in st.session_state:
+    st.session_state.pdf_processed = False
+
+
+if pdf_file and not st.session_state.pdf_processed:
+     with st.spinner("Extracting and analyzing your resume..."):
+        reader = PdfReader(pdf_file)
+        text = ""
+        for page in reader.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text
+
+        # Store extracted text
+        response = gu.call_gemini(
+            text,
+            "You are an AI interviewer. First, you have been provided the extracted data of the PDF. Now organize the data and return it."
         )
-    # response = client.models.generate_content(
-    #     model="gemini-2.5-flash",
-    #     contents="How does AI work?",
-    #     config=types.GenerateContentConfig(
-    #         thinking_config=types.ThinkingConfig(thinking_budget=0) # Disables thinking
-    #     ),
-    # )
-    st.write(response.text)
+        st.session_state.response_text = response.text
+        st.session_state.pdf_processed = True
+        time.sleep(1)
+
+    
+
+# Show AI response in sidebar
+if st.session_state.response_text:
+    with st.sidebar:
+        st.subheader("Organized Resume")
+        st.write(st.session_state.response_text)
+
+# Button to start interview
+if st.button("Start Interview"):
+    
+    response = gu.call_gemini(
+        st.session_state.response_text,
+        "You are an AI interviewer. you have to start asking the interview questions, don't distract by interview candidates if they are say anything that is not relevent to interview. and ask 10 questions one by one and "
+    )
+    st.session_state.interview_started = True
+
+
+# Display interview started section
+if st.session_state.interview_started:
+    st.success("Interview started!")
+    # You can add interview questions here
+    
+
