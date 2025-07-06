@@ -162,3 +162,6 @@ print("Variance:", np.var(data)) # Output: 200.0
 ---
 
 In the next tutorial, we will explore the concept of Broadcasting, which allows NumPy to perform operations on arrays of different shapes.
+
+**Next:** [5. Broadcasting](05_broadcasting.md)
+**Previous:** [3. Array Attributes and Basics](03_array_attributes_and_basics.md)

@@ -192,3 +192,6 @@ print(randint_2d)
 ---
 
 In the next tutorial, we will explore array attributes and basic operations like indexing and slicing.
+
+**Next:** [3. Array Attributes and Basics](03_array_attributes_and_basics.md)
+**Previous:** [1. Introduction to NumPy](01_introduction_to_numpy.md)

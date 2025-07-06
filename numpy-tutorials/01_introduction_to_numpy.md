@@ -58,3 +58,5 @@ If you see a version number printed (e.g., `1.26.4`), then NumPy is successfully
 ---
 
 In the next tutorial, we will dive into how to create NumPy arrays in various ways.
+
+**Next:** [2. Creating NumPy Arrays](02_creating_numpy_arrays.md)

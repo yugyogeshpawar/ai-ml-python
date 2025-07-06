@@ -300,3 +300,6 @@ for part in split_unequal:
 ---
 
 In the next tutorial, we will explore Linear Algebra operations with NumPy, which are fundamental to many AI/ML algorithms.
+
+**Next:** [8. Linear Algebra with NumPy](08_linear_algebra_with_numpy.md)
+**Previous:** [6. Advanced Indexing](06_advanced_indexing.md)

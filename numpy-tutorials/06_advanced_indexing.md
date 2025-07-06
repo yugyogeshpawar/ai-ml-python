@@ -200,3 +200,6 @@ print("Elements at (0,0), (1,2), (2,1):", selected_elements) # Output: [1 6 8]
 ---
 
 In the next tutorial, we will learn about manipulating arrays, including reshaping, stacking, and splitting.
+
+**Next:** [7. Manipulating Arrays](07_manipulating_arrays.md)
+**Previous:** [5. Broadcasting](05_broadcasting.md)

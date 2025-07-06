@@ -202,3 +202,6 @@ print("\nNormalized Data (mean subtracted):\n", normalized_data)
 ---
 
 In the next tutorial, we will explore Advanced Indexing techniques in NumPy, including Boolean and Fancy Indexing.
+
+**Next:** [6. Advanced Indexing](06_advanced_indexing.md)
+**Previous:** [4. Universal Functions (ufuncs)](04_universal_functions_ufuncs.md)

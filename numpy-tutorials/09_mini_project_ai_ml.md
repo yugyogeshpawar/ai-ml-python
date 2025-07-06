@@ -124,3 +124,5 @@ print("Euclidean Distance (np.linalg.norm):", euclidean_distance_norm)
 ---
 
 This concludes our NumPy tutorial series! You now have a solid foundation in NumPy, which is an indispensable tool for anyone working in AI and Machine Learning. Keep practicing, and explore more advanced topics as you continue your journey!
+
+**Previous:** [8. Linear Algebra with NumPy](08_linear_algebra_with_numpy.md)

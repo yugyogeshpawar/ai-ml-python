@@ -191,3 +191,6 @@ print("Verification (A @ x):", A @ x)
 ---
 
 In the final tutorial, we will work on a mini-project to apply the NumPy concepts learned throughout this series to an AI/ML context.
+
+**Next:** [9. Putting it all together: A Mini-Project for AI/ML](09_mini_project_ai_ml.md)
+**Previous:** [7. Manipulating Arrays](07_manipulating_arrays.md)

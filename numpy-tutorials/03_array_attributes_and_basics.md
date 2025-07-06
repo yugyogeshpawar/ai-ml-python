@@ -228,3 +228,6 @@ print("Scalar Multiplication (arr1 * 2):", arr1 * 2) # Output: [ 2  4  6  8]
 ---
 
 In the next tutorial, we will delve into Universal Functions (ufuncs) and their role in efficient array computations.
+
+**Next:** [4. Universal Functions (ufuncs)](04_universal_functions_ufuncs.md)
+**Previous:** [2. Creating NumPy Arrays](02_creating_numpy_arrays.md)
