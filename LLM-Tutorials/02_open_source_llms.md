@@ -6,12 +6,16 @@ This tutorial explores Open Source Large Language Models (LLMs), their advantage
 
 ## Overview of Open Source LLMs
 
-Open Source LLMs are language models whose code and weights are publicly available, allowing for community contributions, modifications, and redistribution. Examples include:
+Open Source LLMs are language models whose code and weights are publicly available, allowing for community contributions, modifications, and redistribution. Here are some popular examples:
 
-*   Llama (Meta)
-*   Mistral (Mistral AI)
-*   Falcon (Technology Innovation Institute)
-*   Bloom (BigScience)
+| Model | Developer | Key Features |
+| --- | --- | --- |
+| Llama 2 | Meta | High-performing, available in various sizes (7B, 13B, 70B). |
+| Mistral 7B | Mistral AI | Excellent performance for its size, known for its efficiency. |
+| Falcon | TII | Powerful model with a focus on high-quality, multilingual data. |
+| Gemma | Google | A family of lightweight, state-of-the-art open models. |
+| Phi-3 | Microsoft | A family of small, powerful, and cost-effective models. |
+| Bloom | BigScience | A large, multilingual model developed by a large research collaboration. |
 
 ## Advantages of Open Source LLMs
 
@@ -24,7 +28,16 @@ Open Source LLMs are language models whose code and weights are publicly availab
 
 *   **Resource Intensive:** Training and fine-tuning can require significant computational resources.
 *   **Model Quality:** Performance may vary compared to closed-source models, depending on the specific model and task.
-*   **Licensing:** Understanding and adhering to the specific licenses (e.g., Apache 2.0, MIT) is crucial.
+*   **Licensing:** Understanding and adhering to the specific licenses is crucial.
+
+## Understanding Open Source Licenses
+
+Open source licenses dictate how you can use, modify, and distribute the models. Here's a quick guide to some common licenses:
+
+*   **MIT License:** Very permissive. You can do almost anything with the model, as long as you include the original copyright and license notice.
+*   **Apache 2.0 License:** Similar to MIT, but also provides an express grant of patent rights from contributors to users.
+*   **Creative Commons (e.g., CC BY-SA 4.0):** Often used for datasets. The "SA" (ShareAlike) clause requires you to share any modifications under the same license.
+*   **Llama 2 License:** A custom license that has specific restrictions, such as not being able to use the model to improve other large language models.
 
 ## How to Access and Use Open Source LLMs
 

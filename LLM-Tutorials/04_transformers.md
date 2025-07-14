@@ -18,10 +18,41 @@ The attention mechanism allows the model to weigh the importance of different wo
 
 ## Encoder and Decoder Components
 
-The Transformer architecture typically consists of two main components:
+The Transformer architecture consists of two main components: the **Encoder** and the **Decoder**.
 
-*   **Encoder:** Processes the input sequence and creates a contextualized representation.
-*   **Decoder:** Generates the output sequence based on the encoder's output and the attention mechanism.
+*   **The Encoder Stack:** The encoder's job is to "understand" the input sequence. It is a stack of identical layers, each containing two sub-layers:
+    1.  A multi-head self-attention mechanism.
+    2.  A simple, position-wise fully connected feed-forward network.
+*   **The Decoder Stack:** The decoder's job is to generate the output sequence. It is also a stack of identical layers, but each layer has three sub-layers:
+    1.  A masked multi-head self-attention mechanism (to prevent positions from attending to subsequent positions).
+    2.  A multi-head attention mechanism that takes the output of the encoder stack as input.
+    3.  A simple, position-wise fully connected feed-forward network.
+
+### Visualizing the Transformer Architecture
+
+Here is a simplified diagram of the Transformer architecture:
+
+```
++-----------------+      +-----------------+
+|   Input Text    |      |  Output Text    |
++-----------------+      +-----------------+
+        |                      ^
+        v                      |
++-----------------+      +-----------------+
+| Input Embedding |      | Output Embedding|
++-----------------+      +-----------------+
+        |                      ^
+        v                      |
++-----------------+      +-----------------+
+| Positional Enc. |      | Positional Enc. |
++-----------------+      +-----------------+
+        |                      ^
+        v                      |
++-----------------+      +-----------------+
+|    Encoder      |----->|    Decoder      |
+| (N layers)      |      | (N layers)      |
++-----------------+      +-----------------+
+```
 
 ## Positional Encoding
 

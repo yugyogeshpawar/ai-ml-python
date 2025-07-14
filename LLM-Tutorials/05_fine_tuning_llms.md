@@ -16,17 +16,53 @@ Fine-tuning is the process of taking a pre-trained LLM and further training it o
 
 ## Different Fine-tuning Techniques
 
-*   **Full Fine-tuning:** Training all the parameters of the LLM. This can be computationally expensive.
-*   **Parameter-Efficient Fine-tuning (PEFT):** Techniques that fine-tune only a small subset of the model's parameters, reducing computational cost. Examples include:
-    *   **LoRA (Low-Rank Adaptation):** Adds trainable low-rank matrices to the model's layers.
-    *   **Prefix Tuning:** Adds a trainable prefix to the input sequence.
-    *   **Prompt Tuning:** Optimizes a set of continuous prompts.
+There are two main approaches to fine-tuning:
+
+*   **Full Fine-tuning:** This involves updating all the parameters of the LLM. While this can lead to the best performance, it is also the most computationally expensive approach.
+*   **Parameter-Efficient Fine-tuning (PEFT):** This is a collection of techniques that focus on fine-tuning only a small subset of the model's parameters. This significantly reduces the computational cost and memory requirements. Some popular PEFT techniques include:
+    *   **LoRA (Low-Rank Adaptation):** Instead of updating the large weight matrices of the model, LoRA adds smaller, trainable "adapter" matrices to the model's layers. This is like adding small, efficient "tuning knobs" to a large engine instead of rebuilding the whole thing.
+    *   **Prefix Tuning:** This involves adding a small, trainable "prefix" to the input sequence. The model learns to adjust its behavior based on this prefix.
+    *   **Prompt Tuning:** Similar to prefix tuning, but the "prompt" is a continuous vector that is optimized directly by the model.
+
+### Visualizing Full Fine-tuning vs. PEFT
+
+```
++---------------------+      +---------------------+
+| Full Fine-tuning    |      | PEFT (e.g., LoRA)   |
++---------------------+      +---------------------+
+| Updates all model   |      | Freezes most of the |
+| parameters.         |      | model and only      |
+|                     |      | updates a small     |
+| [W1] [W2] ... [Wn]  |      | number of parameters|
+|  (all trainable)    |      | (the adapters).     |
+|                     |      |                     |
+| High memory usage.  |      | [W1] [W2] ... [Wn]  |
+|                     |      |  (frozen)           |
+|                     |      | + [A1] [A2] ... [An]  |
+|                     |      |  (trainable adapters)|
+|                     |      |                     |
+|                     |      | Low memory usage.   |
++---------------------+      +---------------------+
+```
 
 ## Data Preparation for Fine-tuning
 
-*   **Dataset Selection:** Choose a dataset relevant to your target task or domain.
-*   **Data Cleaning:** Clean and preprocess the data to ensure quality.
-*   **Data Formatting:** Format the data in a way that is compatible with the LLM and the fine-tuning process. This often involves creating input-output pairs.
+The quality of your fine-tuning data is crucial for the success of your model. Here's a checklist for preparing your data:
+
+*   **1. Dataset Selection:**
+    *   Choose a dataset that is highly relevant to your target task (e.g., a dataset of question-answer pairs for a Q&A bot).
+    *   Ensure the dataset is large enough to allow the model to learn the desired patterns.
+*   **2. Data Cleaning:**
+    *   Remove any irrelevant or noisy data.
+    *   Correct any errors or inconsistencies in the data.
+*   **3. Data Formatting:**
+    *   Format the data into a consistent structure, typically input-output pairs. For example: `{"instruction": "Translate to French", "input": "Hello", "output": "Bonjour"}`.
+    *   Ensure the formatting is compatible with the LLM and the fine-tuning library you are using.
+*   **4. Data Splitting:**
+    *   Split your data into training, validation, and test sets.
+    *   The training set is used to train the model.
+    *   The validation set is used to tune the model's hyperparameters.
+    *   The test set is used to evaluate the final performance of the model.
 
 ## Code Example: Fine-tuning a pre-trained LLM on a custom dataset (Python with Transformers)
 

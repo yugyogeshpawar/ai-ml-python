@@ -6,11 +6,13 @@ This tutorial covers Closed Source Large Language Models (LLMs), their character
 
 ## Overview of Closed Source LLMs
 
-Closed Source LLMs are language models whose code and weights are not publicly available. They are typically developed and maintained by private companies. Examples include:
+Closed Source LLMs are language models whose code and weights are not publicly available. They are typically developed and maintained by private companies. Here's a comparison of some of the leading models:
 
-*   GPT-4 (OpenAI)
-*   Gemini (Google)
-*   Claude (Anthropic)
+| Model | Developer | Key Strengths |
+| --- | --- | --- |
+| GPT-4 | OpenAI | State-of-the-art performance in reasoning and language understanding. |
+| Gemini | Google | Multimodal capabilities (text, images, audio, video) and strong integration with Google services. |
+| Claude 3 | Anthropic | Focus on safety, steerability, and a large context window for processing long documents. |
 
 ## Advantages of Closed Source LLMs
 
