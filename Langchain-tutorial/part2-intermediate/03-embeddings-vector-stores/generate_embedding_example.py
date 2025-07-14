@@ -1,15 +1,14 @@
-from langchain_openai import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 
-# Ensure your OPENAI_API_KEY is set as an environment variable.
-
-# 1. Initialize the embedding model
-embeddings_model = OpenAIEmbeddings()
+# 1. Initialize the local embedding model
+# This uses a model from Hugging Face that runs on your machine.
+# The first time you run this, it will download the model (approx. 90MB).
+embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
 # 2. Define a sentence you want to embed
 sentence = "The quick brown fox jumps over the lazy dog."
 
 # 3. Use the .embed_query() method to get the embedding vector
-# This method is used for embedding single pieces of text (like a user query).
 embedding_vector = embeddings_model.embed_query(sentence)
 
 # 4. Print the results

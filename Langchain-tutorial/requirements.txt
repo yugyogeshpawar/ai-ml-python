@@ -1,2 +1,13 @@
 langchain
 openai
+beautifulsoup4
+pypdf
+tiktoken
+faiss-cpu
+langchain-experimental
+serpapi
+fastapi
+uvicorn
+langserve
+sentence-transformers
+torch

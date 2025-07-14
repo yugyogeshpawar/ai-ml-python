@@ -38,6 +38,12 @@ Let's see this in action. The `llm_example.py` file demonstrates the classic LLM
 
 3.  **`response = llm.predict(prompt)`**: This is the core interaction. The `.predict()` method takes our prompt string, sends it to the OpenAI API, and returns the model's response as a simple string.
 
+## A Note on API Keys and Local Models
+
+For simplicity, these initial examples use the OpenAI API, which requires an API key. However, a major strength of LangChain is its support for a wide variety of models, including free, open-source models that you can run locally on your own machine.
+
+If you don't have an OpenAI API key, you can adapt these examples to use a local model provider like `Ollama` or a model from the `HuggingFaceHub`. This typically involves more setup (like downloading the model files), but it's a great way to build applications without relying on paid services. We will use a local model for embeddings in Part 2.
+
 ## A Look at Chat Models
 
 While we will dive deeper into Chat Models later, it's useful to see a comparison now. If you were to use a Chat Model for the same task, the code would look like this (as seen in the exercises):

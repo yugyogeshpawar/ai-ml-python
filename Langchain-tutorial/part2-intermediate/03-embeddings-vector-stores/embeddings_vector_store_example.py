@@ -1,11 +1,8 @@
-from langchain_openai import OpenAIEmbeddings
+from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from langchain.schema import Document
 
-# Ensure your OPENAI_API_KEY is set as an environment variable.
-
 # 1. Create Sample Documents
-# In a real application, these would come from Document Loaders and Text Splitters.
 documents = [
     Document(page_content="The quick brown fox jumps over the lazy dog.", metadata={"source": "sentence1"}),
     Document(page_content="A dog is a man's best friend.", metadata={"source": "sentence2"}),
@@ -14,20 +11,17 @@ documents = [
     Document(page_content="The dog chased the cat.", metadata={"source": "sentence5"}),
 ]
 
-# 2. Initialize the Embedding Model
-# This model converts text into numerical vectors (embeddings).
-embeddings = OpenAIEmbeddings()
+# 2. Initialize the Local Embedding Model
+# This uses a model from Hugging Face that runs on your machine.
+# The first time you run this, it will download the model (approx. 90MB).
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
-# 3. Create a Vector Store (FAISS in this case) from the documents and embeddings
-# FAISS.from_documents takes your documents and the embedding model,
-# converts each document's content into an embedding, and stores it.
+# 3. Create a Vector Store from the documents and embeddings
 vectorstore = FAISS.from_documents(documents, embeddings)
 
-print("Vector store created successfully with documents.")
+print("Vector store created successfully with documents using a local model.")
 
 # 4. Perform a Similarity Search
-# When you query, your query string is also converted into an embedding,
-# and the vector store finds the most similar document embeddings.
 query = "What animal is known for being lazy?"
 docs = vectorstore.similarity_search(query)
 
