@@ -1,4 +1,4 @@
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 # 1. Initialize the local embedding model
 # This uses a model from Hugging Face that runs on your machine.

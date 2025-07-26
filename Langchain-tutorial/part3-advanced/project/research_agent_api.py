@@ -1,30 +1,31 @@
 import os
 from fastapi import FastAPI
 from langserve import add_routes
-from langchain.agents import initialize_agent, Tool
+from langchain import hub
+from langchain.agents import create_react_agent, AgentExecutor
+from langchain_community.utilities import SerpAPIWrapper
 from langchain_openai import ChatOpenAI
-from langchainhub import serper
+from langchain.tools import Tool
 import uvicorn
 
 # Ensure your OPENAI_API_KEY and SERPAPI_API_KEY are set
 
 # 1. Define the Tools
+search = SerpAPIWrapper()
 tools = [
     Tool(
         name="Web Search",
-        func=serper.run,
+        func=search.run,
         description="Useful for searching the web and getting concise answers to factual questions.",
     )
 ]
 
 # 2. Initialize the LLM and Agent
 llm = ChatOpenAI(temperature=0, model="gpt-4")
-agent = initialize_agent(
-    tools,
-    llm,
-    agent="zero-shot-react-description",
-    verbose=True,
-)
+prompt = hub.pull("hwchase17/react")
+agent = create_react_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
 
 # 3. Create the FastAPI app
 app = FastAPI(
@@ -36,7 +37,7 @@ app = FastAPI(
 # 4. Add the agent to the app using LangServe
 add_routes(
     app,
-    agent,
+    agent_executor,
     path="/research-agent",
 )
 

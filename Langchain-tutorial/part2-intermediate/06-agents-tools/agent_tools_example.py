@@ -1,7 +1,9 @@
 import os
-from langchain.agents import initialize_agent, Tool
+from langchain import hub
+from langchain.agents import create_react_agent, AgentExecutor
+from langchain_community.utilities import SerpAPIWrapper
 from langchain_openai import OpenAI
-from langchainhub import serper
+from langchain.tools import Tool
 
 # Ensure your OPENAI_API_KEY and SERPAPI_API_KEY are set as environment variables
 
@@ -9,35 +11,32 @@ from langchainhub import serper
 llm = OpenAI(temperature=0)
 
 # 2. Define the Tools
-# In this example, we're using a web search tool from SerpAPI.
-# You can explore other tools in the LangChain documentation.
+search = SerpAPIWrapper()
 tools = [
     Tool(
         name="Web Search",
-        func=serper.run,
+        func=search.run,
         description="Useful for searching the web and getting concise answers to factual questions.",
     )
 ]
 
-# 3. Initialize the Agent
-# We're using the "zero-shot-react-description" agent type, which relies on tool descriptions.
-# The agent uses the LLM to decide which tool to use based on the query and the tool descriptions.
-agent = initialize_agent(
-    tools,
-    llm,
-    agent="zero-shot-react-description",
-    verbose=True,  # Set verbose to True to see the agent's reasoning steps
-)
+# 3. Create the Agent
+# We get a prompt template from the hub that is designed for ReAct agents.
+prompt = hub.pull("hwchase17/react")
+agent = create_react_agent(llm, tools, prompt)
 
-# 4. Run the Agent
-# Provide a query to the agent, and it will use the available tools to try to answer it.
+# 4. Create the Agent Executor
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+
+# 5. Run the Agent
 query = "What is the current weather in San Francisco?"
 print(f"Running query: {query}")
-response = agent.run(query)
+response = agent_executor.invoke({"input": query})
 print(f"Agent's response: {response}")
 
 # Another example
 query2 = "What are the main differences between Langchain and llamaindex?"
 print(f"\nRunning query: {query2}")
-response2 = agent.run(query2)
+response2 = agent_executor.invoke({"input": query2})
 print(f"Agent's response: {response2}")

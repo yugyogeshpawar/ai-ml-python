@@ -1,4 +1,4 @@
-from langchain.document_loaders import WebBaseLoader
+from langchain_community.document_loaders import WebBaseLoader
 
 # Create a loader for a specific web page
 # You can replace this URL with any other to load different content

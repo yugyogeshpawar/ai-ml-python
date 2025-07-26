@@ -18,17 +18,16 @@ LangChain provides several types of memory, from simple buffers that store the e
 
 ## Step-by-Step Code Tutorial
 
-Let's see how to add memory to an `LLMChain` using `ConversationBufferMemory`.
+Let's see how to add memory using the dedicated `ConversationChain` and `ConversationBufferMemory`.
 
 ### 1. Import the Necessary Components
 
-We need our `LLMChain` and `OpenAI` model, but now we also import `ConversationBufferMemory`.
+We'll import `ConversationChain` and `ConversationBufferMemory`.
 
 ```python
-from langchain.chains import LLMChain
+from langchain.chains import ConversationChain
 from langchain_openai import OpenAI
 from langchain.memory import ConversationBufferMemory
-from langchain.prompts import PromptTemplate
 ```
 
 ### 2. Create the Script
@@ -37,18 +36,13 @@ The `memory_example.py` script demonstrates how to build a conversational chain.
 
 ### Key Concepts in the Code
 
-1.  **`memory = ConversationBufferMemory(...)`**: We create an instance of our memory component.
-    *   `memory_key="chat_history"`: This is a crucial parameter. It's the name of the variable where the conversation history will be stored. This key **must** also be present in our prompt template's `input_variables`.
+1.  **`memory = ConversationBufferMemory()`**: We create a simple instance of our memory component. The `ConversationChain` is smart enough to know how to use it without needing explicit `memory_key` variables.
 
-2.  **`template = """..."""`**: We define our prompt template. Notice that it now includes a placeholder for our memory variable: `{chat_history}`.
+2.  **`conversation_chain = ConversationChain(llm=llm, memory=memory)`**: We create our `ConversationChain`, passing in the `llm` and the `memory` object. The `ConversationChain` comes with a default prompt that is already designed for conversation, so we don't need to create our own `PromptTemplate`.
 
-3.  **`prompt = PromptTemplate(...)`**: We create our `PromptTemplate`. Critically, we include `"chat_history"` in the `input_variables` list.
-
-4.  **`conversation_chain = LLMChain(...)`**: We create our `LLMChain` as usual, but now we pass in the `memory` object we created.
-
-5.  **`conversation_chain.predict(input="...")`**: We call the chain multiple times.
-    *   **First call:** The `{chat_history}` variable is empty. The chain gets a response from the LLM and saves the "Human: Hi!" and the AI's response to the memory.
-    *   **Second call:** The chain first loads the history from memory (`"Human: Hi!\nAI: Hello! How can I help you today?"`). It then includes this history in the new prompt, along with the new input ("I'm doing great! Just learning about LangChain."). The LLM now has the context of the previous turn and can generate a relevant response.
+3.  **`conversation_chain.invoke(input="...")`**: We call the chain multiple times using `.invoke()`.
+    *   **First call:** The memory is empty. The chain gets a response from the LLM and saves the "Human: Hi!" and the AI's response to the memory.
+    *   **Second call:** The chain first loads the history from memory. It then includes this history in the new prompt, along with the new input ("I'm doing great! Just learning about LangChain."). The LLM now has the context of the previous turn and can generate a relevant response.
 
 ## Why is Memory So Important?
 

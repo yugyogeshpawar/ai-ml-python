@@ -1,4 +1,4 @@
-from langchain.llms import OpenAI
+from langchain_openai import OpenAI
 
 # Initialize the LLM with a temperature of 0.6
 # Temperature controls the "creativity" or randomness of the output.
@@ -9,8 +9,8 @@ llm = OpenAI(temperature=0.6)
 prompt = "What would be a good name for a company that makes colorful socks?"
 
 # Get a prediction from the LLM
-# The .predict() method sends the prompt to the model and returns the string response.
-response = llm.predict(prompt)
+# The .invoke() method sends the prompt to the model and returns the string response.
+response = llm.invoke(prompt)
 
 # Print the response
 print(f"Prompt: {prompt}")

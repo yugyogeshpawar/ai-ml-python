@@ -1,6 +1,5 @@
-from langchain.agents import create_sql_agent
-from langchain.agents.agent_toolkits import SQLDatabaseToolkit
-from langchain.sql_database import SQLDatabase
+from langchain_community.agent_toolkits import create_sql_agent
+from langchain_community.utilities import SQLDatabase
 from langchain_openai import OpenAI
 import os
 
@@ -28,24 +27,20 @@ except Exception as e:
 # 2. Initialize the LLM
 llm = OpenAI(temperature=0)
 
-# 3. Create the SQLDatabaseToolkit
-# This toolkit provides the agent with tools for interacting with the SQL database.
-toolkit = SQLDatabaseToolkit(db=db, llm=llm)
-
-# 4. Create the SQL Agent
+# 3. Create the SQL Agent
 agent_executor = create_sql_agent(
     llm=llm,
-    toolkit=toolkit,
+    db=db,
     verbose=True
 )
 
-# 5. Ask a question!
+# 4. Ask a question!
 query = "How many employees are there?"
-result = agent_executor.run(query)
+result = agent_executor.invoke({"input": query})
 print(f"Query: {query}\nResult: {result}")
 
 query2 = "Who is the manager of the Engineering department?"
-result2 = agent_executor.run(query2)
+result2 = agent_executor.invoke({"input": query2})
 print(f"\nQuery: {query2}\nResult: {result2}")
 
 # Clean up the database file

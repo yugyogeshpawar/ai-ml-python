@@ -1,7 +1,7 @@
 import os
-from langchain.agents import create_sql_agent
-from langchain.agents.agent_toolkits import SQLDatabaseToolkit
-from langchain.sql_database import SQLDatabase
+from langchain_community.agent_toolkits import create_sql_agent
+from langchain_community.agent_toolkits import SQLDatabaseToolkit
+from langchain_community.utilities import SQLDatabase
 from langchain_openai import OpenAI
 
 # --- IMPORTANT ---
@@ -12,7 +12,9 @@ from langchain_openai import OpenAI
 # Example for PostgreSQL: "postgresql+psycopg2://user:password@localhost:5432/mydatabase"
 db_uri = os.environ.get("DATABASE_URI")
 if not db_uri:
-    raise ValueError("DATABASE_URI environment variable not set. Please set it before running the script.")
+    # Create a dummy sqlite db for demonstration
+    db_uri = "sqlite:///dummy.db"
+
 
 # 2. Set up the database connection
 try:
@@ -25,23 +27,19 @@ except Exception as e:
 # 3. Initialize the LLM
 llm = OpenAI(temperature=0)
 
-# 4. Create the SQLDatabaseToolkit
-# This toolkit provides the agent with tools to interact with your database.
-toolkit = SQLDatabaseToolkit(db=db, llm=llm)
-
-# 5. Create the SQL Agent
+# 4. Create the SQL Agent
 agent_executor = create_sql_agent(
     llm=llm,
-    toolkit=toolkit,
+    db=db,
     verbose=True
 )
 
-# 6. Ask a question about your data!
+# 5. Ask a question about your data!
 # Replace this with a question relevant to your database schema.
 print("--- Example 1: Describing a table ---")
 query = "Describe the 'products' table for me."
 try:
-    result = agent_executor.run(query)
+    result = agent_executor.invoke({"input": query})
     print(f"Query: {query}\nResult: {result}")
 except Exception as e:
     print(f"An error occurred: {e}")
@@ -50,7 +48,7 @@ except Exception as e:
 print("\n--- Example 2: Counting rows ---")
 query2 = "How many users are registered?"
 try:
-    result2 = agent_executor.run(query2)
+    result2 = agent_executor.invoke({"input": query2})
     print(f"Query: {query2}\nResult: {result2}")
 except Exception as e:
     print(f"An error occurred: {e}")

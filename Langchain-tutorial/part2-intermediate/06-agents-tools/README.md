@@ -28,10 +28,10 @@ Let's build a simple agent that can use a web search tool to answer questions.
 
 ### 1. Install Necessary Libraries
 
-We'll need `langchainhub` to access the search tool and `serpapi` to use the SerpAPI search engine. You'll also need a SerpAPI API key.
+We'll need `serpapi` to use the SerpAPI search engine. You'll also need a SerpAPI API key.
 
 ```bash
-pip install langchainhub serpapi
+pip install serpapi
 ```
 
 ### 2. Set the SerpAPI Key
@@ -44,16 +44,13 @@ The `agent_tools_example.py` script demonstrates how to create and use an agent 
 
 ### Key Concepts in the Code
 
-1.  **`from langchain.agents import initialize_agent, Tool`**: We import the necessary modules for creating agents and defining tools.
-2.  **`from langchainhub import serper`**: We import the SerpAPI tool from LangChain Hub.
-3.  **`tools = [Tool(...)]`**: We define a list of tools that our agent can use. Each tool has a `name`, a `func` (the function to execute), and a `description`.
-4.  **`agent = initialize_agent(...)`**: We create the agent.
-    *   `llm`: The language model that will power the agent's reasoning.
-    *   `tools`: The list of tools the agent can use.
-    *   `agent="zero-shot-react-description"`: The type of agent to use. `zero-shot-react-description` is a common type that uses the tool descriptions to decide which tool to use.
-    *   `verbose=True`: This is very useful for debugging. It prints out the agent's thought process at each step.
-
-5.  **`agent.run(query)`**: We give the agent a query, and it uses its reasoning abilities and the available tools to try to answer the question.
+1.  **`from langchain.agents import create_react_agent, AgentExecutor`**: We import the necessary functions for creating ReAct agents and the executor that runs them.
+2.  **`from langchain_community.utilities import SerpAPIWrapper`**: We import the `SerpAPIWrapper` which is a convenient way to use the SerpAPI tool.
+3.  **`tools = [Tool(...)]`**: We define a list of tools that our agent can use. Each tool has a `name`, a `func` (the function to execute), and a `description`. The description is critical, as the agent uses it to decide when to use the tool.
+4.  **`prompt = hub.pull("hwchase17/react")`**: We pull a pre-designed prompt from LangChain Hub that is specifically engineered to make an LLM behave as a ReAct agent.
+5.  **`agent = create_react_agent(llm, tools, prompt)`**: We create the agent, which is the "brain" that decides what to do. It combines the LLM, the tools, and the prompt.
+6.  **`agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)`**: We create the `AgentExecutor`. This is the runtime for the agent. It takes the agent and tools, and handles the loop of executing the agent, running the chosen tools, and feeding the results back to the agent until the task is complete.
+7.  **`agent_executor.invoke({"input": query})`**: We run the agent by calling `.invoke()` on the executor, passing the user's query.
 
 ## Why are Agents and Tools So Powerful?
 

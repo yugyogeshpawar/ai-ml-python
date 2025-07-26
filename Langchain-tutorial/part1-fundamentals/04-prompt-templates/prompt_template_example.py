@@ -1,5 +1,5 @@
-from langchain.llms import OpenAI
-from langchain import PromptTemplate
+from langchain_openai import OpenAI
+from langchain.prompts import PromptTemplate
 
 # Initialize the LLM
 llm = OpenAI(temperature=0.6)
@@ -15,7 +15,7 @@ prompt_template = PromptTemplate(
 formatted_prompt = prompt_template.format(product="eco-friendly water bottles")
 
 # Get a prediction from the LLM using the formatted prompt
-response = llm.predict(formatted_prompt)
+response = llm.invoke(formatted_prompt)
 
 print(f"Prompt: {formatted_prompt}")
 print(f"Response: {response}")

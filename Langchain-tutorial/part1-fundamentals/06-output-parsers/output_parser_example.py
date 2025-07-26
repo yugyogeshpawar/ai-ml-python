@@ -1,5 +1,5 @@
-from langchain.llms import OpenAI
-from langchain import PromptTemplate
+from langchain_openai import OpenAI
+from langchain.prompts import PromptTemplate
 from langchain.output_parsers import CommaSeparatedListOutputParser
 
 # Initialize the LLM
@@ -19,15 +19,11 @@ prompt_template = PromptTemplate(
     partial_variables={"format_instructions": format_instructions}
 )
 
-# Format the prompt with a subject
-formatted_prompt = prompt_template.format(subject="popular dog breeds")
+# Create the chain
+chain = prompt_template | llm | output_parser
 
-# Get the response from the LLM
-response = llm.predict(formatted_prompt)
-
-# Parse the raw string output into a Python list
-parsed_output = output_parser.parse(response)
+# Invoke the chain with a subject
+parsed_output = chain.invoke({"subject": "popular dog breeds"})
 
 print(f"Subject: popular dog breeds")
-print(f"Raw Response:\n{response}")
 print(f"Parsed Response:\n{parsed_output}")

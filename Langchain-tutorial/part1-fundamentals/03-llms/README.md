@@ -28,7 +28,7 @@ Let's see this in action. The `llm_example.py` file demonstrates the classic LLM
 
 ### Key Concepts in the Code
 
-1.  **`from langchain.llms import OpenAI`**: We import the `OpenAI` class, which is LangChain's wrapper for OpenAI's text-completion models.
+1.  **`from langchain_openai import OpenAI`**: We import the `OpenAI` class from the `langchain_openai` package, which is LangChain's wrapper for OpenAI's text-completion models.
 
 2.  **`llm = OpenAI(temperature=0.6)`**: We initialize the model.
     *   **`temperature`**: This is a crucial parameter that controls the "creativity" of the model.
@@ -36,7 +36,7 @@ Let's see this in action. The `llm_example.py` file demonstrates the classic LLM
         *   A temperature of `1.0` is **highly creative**. The model will take more risks, using less likely words, which can lead to more interesting, diverse, and sometimes nonsensical answers.
         *   A value like `0.6` or `0.7` is a good balance for most creative tasks.
 
-3.  **`response = llm.predict(prompt)`**: This is the core interaction. The `.predict()` method takes our prompt string, sends it to the OpenAI API, and returns the model's response as a simple string.
+3.  **`response = llm.invoke(prompt)`**: This is the core interaction. The `.invoke()` method takes our prompt string, sends it to the OpenAI API, and returns the model's response as a simple string.
 
 ## A Note on API Keys and Local Models
 

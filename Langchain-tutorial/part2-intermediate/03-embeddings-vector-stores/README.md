@@ -43,9 +43,9 @@ The `embeddings_vector_store_example.py` script shows how to do this.
 
 ### Key Concepts in the Code
 
-1.  **`from langchain.embeddings import HuggingFaceEmbeddings`**: We import the `HuggingFaceEmbeddings` class, which allows us to use models from the Hugging Face Hub.
+1.  **`from langchain_community.embeddings import HuggingFaceEmbeddings`**: We import the `HuggingFaceEmbeddings` class from the `langchain_community` package, which allows us to use models from the Hugging Face Hub.
 
-2.  **`from langchain.vectorstores import FAISS`**: We import the FAISS vector store.
+2.  **`from langchain_community.vectorstores import FAISS`**: We import the FAISS vector store from the `langchain_community` package.
 
 3.  **`embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")`**: We initialize our embedding model.
     *   `model_name="all-MiniLM-L6-v2"`: This is a small but effective sentence-transformer model that is great for getting started. The first time you run this, it will be downloaded and cached on your machine.

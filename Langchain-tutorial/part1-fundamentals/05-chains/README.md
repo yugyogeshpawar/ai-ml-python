@@ -4,9 +4,9 @@ We've learned about LLMs and Prompt Templates. Now, we'll learn how to combine t
 
 ## What Exactly is a Chain?
 
-A Chain, in its simplest form, is a pipeline that processes an input and produces an output. It "chains" together different components, where the output of one component becomes the input for the next.
+A Chain is a pipeline that processes an input and produces an output. It "chains" together different components, where the output of one component becomes the input for the next. With the introduction of the **LangChain Expression Language (LCEL)**, creating chains has become more intuitive and powerful.
 
-The most basic and common chain is the `LLMChain`. It represents a single, fundamental operation in an LLM application:
+The most basic chain combines a `PromptTemplate` and an `LLM`. It represents a single, fundamental operation:
 1.  Take user input.
 2.  Use a `PromptTemplate` to format the input into a prompt.
 3.  Pass the formatted prompt to an `LLM`.
@@ -18,20 +18,13 @@ The most basic and common chain is the `LLMChain`. It represents a single, funda
 -   **LLM:** The second station, which performs an action (like painting or shaping) on the molded material.
 -   **Output (e.g., a company name):** The finished product at the end of the line.
 
-By creating a chain, you encapsulate this entire assembly line into a single, reusable object.
+LCEL allows us to define this assembly line using the pipe (`|`) operator, making the flow of data explicit and readable.
 
 ## Step-by-Step Code Tutorial
 
-The `llm_chain_example.py` script shows how to build and use an `LLMChain`. Let's analyze it.
+The `llm_chain_example.py` script shows how to build a chain using LCEL. Let's analyze it.
 
-### 1. Import `LLMChain`
-
-```python
-from langchain.chains import LLMChain
-```
-Alongside our `OpenAI` and `PromptTemplate` imports, we now import the `LLMChain` class.
-
-### 2. Set up the Components
+### 1. Set up the Components
 
 First, we define the individual components that will make up our chain: the LLM and the Prompt Template. This is exactly the same as in the previous lessons.
 
@@ -43,23 +36,26 @@ prompt_template = PromptTemplate(
 )
 ```
 
-### 3. Create the `LLMChain` Instance
+### 2. Create the Chain with LCEL
 
-This is where we assemble our pipeline. We create an instance of `LLMChain` and pass our components to its constructor.
-
-```python
-name_chain = LLMChain(llm=llm, prompt=prompt_template)
-```
-We've now created a `name_chain` object that knows how to take a `product`, use our `prompt_template` to create a prompt, and then call our `llm` with that prompt.
-
-### 4. Run the Chain
-
-This is the beautiful part. Instead of manually formatting the prompt and calling the LLM, we can now just use the chain's `.run()` method.
+This is where the magic happens. We use the pipe (`|`) operator to connect our components.
 
 ```python
-response = name_chain.run("artisanal coffee beans")
+name_chain = prompt_template | llm
 ```
-The `.run()` method is a convenient shortcut that handles the entire process for us. It takes the input variable (`product="artisanal coffee beans"`), executes the chain's logic, and returns the final string output from the LLM.
+This single line of code creates a chain that:
+1.  First, takes an input dictionary (e.g., `{"product": "artisanal coffee beans"}`).
+2.  Pipes it to the `prompt_template`, which formats it into a full prompt string.
+3.  Pipes the resulting prompt string to the `llm`, which generates the final output.
+
+### 3. Run the Chain
+
+Instead of a `.run()` method, LCEL chains use `.invoke()`.
+
+```python
+response = name_chain.invoke({"product": "artisanal coffee beans"})
+```
+The `.invoke()` method takes a dictionary where the keys match the input variables of the first component in the chain (in this case, the `prompt_template`). It executes the entire pipeline and returns the final output.
 
 ## The Power of Chains
 

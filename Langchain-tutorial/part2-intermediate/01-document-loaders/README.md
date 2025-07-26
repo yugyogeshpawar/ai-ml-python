@@ -35,7 +35,7 @@ The `document_loader_example.py` script shows how to do this.
 
 ### Key Concepts in the Code
 
-1.  **`from langchain.document_loaders import WebBaseLoader`**: We import the specific loader we want to use. If we were loading a PDF, we might import `PyPDFLoader`.
+1.  **`from langchain_community.document_loaders import WebBaseLoader`**: We import the specific loader we want to use from the `langchain_community` package. If we were loading a PDF, we might import `PyPDFLoader` from the same package.
 
 2.  **`loader = WebBaseLoader("https://example.com")`**: We create an instance of the loader, passing in the source of our data. In this case, it's the URL of the website we want to load.
 

@@ -1,7 +1,6 @@
 import os
-from langchain.llms import OpenAI
-from langchain import PromptTemplate
-from langchain.chains import LLMChain
+from langchain_openai import OpenAI
+from langchain.prompts import PromptTemplate
 from langchain.output_parsers import PydanticOutputParser
 from pydantic import BaseModel, Field
 
@@ -22,7 +21,7 @@ prompt_template = PromptTemplate(
 
 # --- 4. Initialize the LLM and Chain ---
 llm = OpenAI(temperature=0.7)
-chain = LLMChain(llm=llm, prompt=prompt_template)
+chain = prompt_template | llm | parser
 
 # --- 5. Get User Input and Run the Chain ---
 if __name__ == "__main__":
@@ -34,10 +33,7 @@ if __name__ == "__main__":
         topic = input("Enter a topic for the blog post: ")
 
         # Run the chain
-        output = chain.run(topic)
-
-        # Parse the output
-        parsed_output = parser.parse(output)
+        parsed_output = chain.invoke({"topic": topic})
 
         # Print the result
         print("\n--- Generated Blog Post ---\n")

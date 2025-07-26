@@ -1,5 +1,5 @@
 from langchain_openai import OpenAIEmbeddings
-from langchain.vectorstores import FAISS
+from langchain_community.vectorstores import FAISS
 from langchain.schema import Document
 
 # Ensure your OPENAI_API_KEY is set as an environment variable.

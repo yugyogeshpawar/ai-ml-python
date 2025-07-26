@@ -47,15 +47,24 @@ prompt_template = PromptTemplate(
 *   `output_parser.get_format_instructions()`: This method returns the specific instruction string for this parser.
 *   `partial_variables`: This is a handy feature of `PromptTemplate`. It allows us to "pre-fill" a variable in the template. By putting `format_instructions` here, we don't have to pass it in every time we call `.format()`. The template will automatically include the instructions.
 
-### 4. Run the Chain and Parse the Output
+### 4. Build and Run the Chain with LCEL
 
-After we get the response from the LLM, we use the parser to finish the job.
+With LCEL, the output parser becomes the final piece of our pipeline. We simply pipe the LLM's output to the parser.
 
 ```python
-response = llm.predict(formatted_prompt)
-parsed_output = output_parser.parse(response)
+# Create the chain
+chain = prompt_template | llm | output_parser
+
+# Invoke the chain
+parsed_output = chain.invoke({"subject": "popular dog breeds"})
 ```
-The `.parse()` method takes the raw string (e.g., `"Golden Retriever, Labrador Retriever, ..."`) and transforms it into the final Python object (e.g., `['Golden Retriever', 'Labrador Retriever', ...]`).
+The flow is clear and declarative:
+1.  The input `{"subject": "popular dog breeds"}` goes into the `prompt_template`.
+2.  The formatted prompt goes into the `llm`.
+3.  The LLM's raw string output goes into the `output_parser`.
+4.  The final, parsed list is returned.
+
+The `.invoke()` call now directly returns the final, parsed Python object, making the process seamless.
 
 ## The Power of Pydantic Parsers
 

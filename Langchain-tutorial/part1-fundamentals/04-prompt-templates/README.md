@@ -21,7 +21,7 @@ The `prompt_template_example.py` script demonstrates a basic but powerful use ca
 ### 1. Import `PromptTemplate`
 
 ```python
-from langchain import PromptTemplate
+from langchain.prompts import PromptTemplate
 ```
 This imports the core class we need to create our template.
 
@@ -50,7 +50,7 @@ The `.format()` method takes keyword arguments where the keys match the `input_v
 
 ### 4. Use the Prompt
 
-This final, formatted string is what you pass to the LLM's `.predict()` method, just as we did in the previous lesson.
+This final, formatted string is what you pass to the LLM's `.invoke()` method, just as we did in the previous lesson.
 
 ## Why is This Better Than Just Using f-strings?
 
