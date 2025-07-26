@@ -25,7 +25,21 @@ git clone https://github.com/yugyogeshpawar/ai-ml-python.git
 cd ai-ml-python/Langchain-tutorial
 ```
 
-Install the required dependencies:
+Create and activate a virtual environment. This is a best practice to isolate project dependencies.
+
+**On macOS/Linux:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+**On Windows:**
+```bash
+python -m venv venv
+.\venv\Scripts\activate
+```
+
+Once the virtual environment is activated, install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
